@@ -1,6 +1,6 @@
 <template>
   <el-container>
-    <el-aside :width="(collapse ? 64 : 200) + 'px'">
+    <el-aside :width="(collapse ? 65 : 200) + 'px'">
       <el-menu router background-color="#545c64" text-color="#fff" :default-active="active" active-text-color="#ffd04b" :collapse="collapse">
         <my-menu v-for="(menu, index) in menus" :key="index" :menu="menu" :collapse="collapse"></my-menu>
       </el-menu>

@@ -23,6 +23,7 @@ const routes = [
     children: [
       {
         path: '/admin/dashboard',
+        component: () => import('../views/admin/dashboard/index.vue'),
         redirect: '/admin/dashboard/index',
         meta: {
           title: '数据概述',
@@ -30,7 +31,7 @@ const routes = [
         children: [
           {
             path: '/admin/dashboard/index',
-            component: () => import('../views/admin/dashboard/index.vue'),
+            component: () => import('../views/admin/dashboard/list.vue'),
             meta: {
               title: '数据列表',
             },
@@ -60,3 +61,13 @@ router.beforeEach((to, from, next) => {
     }
   }
 });
+
+// 解决重复点击路由的错误信息
+const routerPush = VueRouter.prototype.push;
+VueRouter.prototype.push = function push(location) {
+  return routerPush.call(this, location).catch((err) => err);
+};
+const routerReplace = VueRouter.prototype.replace;
+VueRouter.prototype.replace = function (location) {
+  return routerReplace.call(this, location).catch((error) => error);
+};
