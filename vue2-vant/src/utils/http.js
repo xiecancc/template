@@ -12,6 +12,7 @@ http.interceptors.request.use(
     // token
     const token = localStorage.getItem('token');
     config.headers = {
+      // 根据实际需要进行调整
       Authorization: token,
       ...config.headers,
     };
