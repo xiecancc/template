@@ -5,7 +5,7 @@ import { startLoading, endLoading } from './loading';
  * 创建 axios 实例，添加默认配置
  */
 const http = axios.create({
-  baseURL: '', // 请求时的基地址
+  baseURL: '/api', // 请求时的基地址
 });
 
 // 请求拦截

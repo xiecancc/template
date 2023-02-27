@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const http = axios.create({
-  baseURL: '', // 请求时的基地址
+  baseURL: '/api', // 请求时的基地址
 });
 
 // 在所有请求之前执行的代码
