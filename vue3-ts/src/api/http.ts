@@ -10,7 +10,7 @@ http.interceptors.request.use(
     return config;
   },
   (err) => {
-    console.log(err);
+    console.error(err);
   },
 );
 
@@ -19,37 +19,24 @@ http.interceptors.response.use(
     return data;
   },
   (err) => {
-    console.log(err);
+    console.error(err);
   },
 );
 
 interface IResponse<T extends any> {
   code: number;
   msg: string;
-  data?: T;
+  data: T;
 }
 
-export default async <T = any>(config: AxiosRequestConfig<any>): Promise<IResponse<T>> => {
+export default async <T = any>(config: AxiosRequestConfig<any>): Promise<T> => {
   try {
-    const { data } = await http.request<IResponse<T>>(config);
-    if (data.code === 200 || data.code === 0) {
-      return {
-        code: 200,
-        msg: data.msg || 'ok',
-        data: data.data,
-      };
-    } else {
-      return {
-        code: -1,
-        msg: data.msg || '请求失败',
-        data: null as any,
-      };
+    const data = (await http.request<T>(config)) as unknown as IResponse<T>;
+    if (data.code === 200 || data.code === 0 || data.data) {
+      return data.data;
     }
+    throw new Error(data.msg || '请求失败');
   } catch (error: any) {
-    console.log(error); // 失败消息提示
-    return {
-      code: -1,
-      msg: error.message || '请求失败',
-    };
+    throw error;
   }
 };

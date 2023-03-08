@@ -1,6 +1,4 @@
 <template>
-  <h1>{{ msg }}</h1>
-
   <div class="card">
     <button type="button" @click="store.increment()">count is {{ double }}</button>
   </div>
@@ -12,5 +10,4 @@ import { useStore } from '@/store';
 
 const store = useStore();
 const { double } = storeToRefs(store);
-defineProps<{ msg: string }>();
 </script>
