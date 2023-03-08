@@ -1,0 +1,9 @@
+<template>
+  <HelloWorld msg="你好啊"></HelloWorld>
+</template>
+
+<script lang="ts" setup>
+import HelloWorld from '@/components/HelloWorld.vue';
+</script>
+
+<style lang="scss" scoped></style>
