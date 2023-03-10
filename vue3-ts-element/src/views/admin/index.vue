@@ -7,7 +7,7 @@
             <el-icon><Menu /></el-icon>
             <span>{{ item.meta?.title }}</span>
           </el-menu-item>
-          <el-sub-menu v-else :index="index">
+          <el-sub-menu v-else :index="String(index)">
             <template #title>
               <el-icon><Menu /></el-icon>
               <span>{{ item.meta?.title }}</span>
@@ -25,6 +25,19 @@
             <Fold v-else />
           </el-icon>
         </el-button>
+        <el-dropdown trigger="click">
+          <span class="el-dropdown-link">
+            admin
+            <el-icon class="el-icon--right">
+              <arrow-down />
+            </el-icon>
+          </span>
+          <template #dropdown>
+            <el-dropdown-menu>
+              <el-dropdown-item @click="logout">退出</el-dropdown-item>
+            </el-dropdown-menu>
+          </template>
+        </el-dropdown>
       </el-header>
       <el-main>
         <el-breadcrumb>
@@ -38,7 +51,15 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+
 const isCollapse = ref(false);
+const router = useRouter();
+
+const logout = () => {
+  localStorage.removeItem('token');
+  router.replace('/login');
+};
 </script>
 
 <style lang="scss" scoped>
@@ -54,8 +75,11 @@ const isCollapse = ref(false);
   }
 
   .el-header {
-    line-height: 60px;
+    // line-height: 60px;
     border-bottom: 1px solid #545c64;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 
   .el-main {
