@@ -31,7 +31,7 @@ interface IResponse<T extends any> {
 
 export default async <T = any>(config: AxiosRequestConfig<any>): Promise<T> => {
   try {
-    const data = (await http.request<T>(config)) as unknown as IResponse<T>;
+    const data = await http.request<any, IResponse<T>>(config);
     if (data.code === 200 || data.code === 0 || data.data) {
       return data.data;
     }
