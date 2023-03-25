@@ -3,17 +3,7 @@
     <el-aside :width="isCollapse ? '65px' : '200px'">
       <el-menu active-text-color="#ffd04b" background-color="#545c64" :default-active="$route.path" text-color="#fff" :collapse="isCollapse" router>
         <template v-for="(item, index) in $router.options.routes[0].children">
-          <el-menu-item v-if="!item.children" :index="item.path">
-            <el-icon><Menu /></el-icon>
-            <span>{{ item.meta?.title }}</span>
-          </el-menu-item>
-          <el-sub-menu v-else :index="String(index)">
-            <template #title>
-              <el-icon><Menu /></el-icon>
-              <span>{{ item.meta?.title }}</span>
-            </template>
-            <el-menu-item v-for="sub in item.children" :index="sub.path">{{ item.meta?.title }}</el-menu-item>
-          </el-sub-menu>
+          <my-menu :item="item" :index="index"></my-menu>
         </template>
       </el-menu>
     </el-aside>
@@ -51,6 +41,7 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
+import myMenu from '@/components/my-menu.vue';
 import { useRouter } from 'vue-router';
 
 const isCollapse = ref(false);

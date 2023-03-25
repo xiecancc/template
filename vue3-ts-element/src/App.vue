@@ -11,13 +11,9 @@
 </template>
 
 <style lang="scss">
-* {
-  margin: 0;
-  padding: 0;
-}
-
 .page {
   height: 100vh;
+  width: 100vw;
 }
 
 @for $i from 1 through 10 {
