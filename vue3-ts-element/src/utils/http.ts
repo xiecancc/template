@@ -1,6 +1,6 @@
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import { endLoading, startLoading } from '../plugins/el-loading';
-import { IResponse } from '../types/IResponse';
+import { IResponse } from '../types/response';
 import { $message } from '@/plugins/el-message';
 
 // 实例化请求对象

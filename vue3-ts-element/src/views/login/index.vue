@@ -15,9 +15,11 @@
 
 <script lang="ts" setup>
 import { loginApi } from '@/api/account';
-import { ILoginParams } from '@/types/IAccount';
+import { ILoginParams } from '@/types/account';
 import { useElForm } from '@/mixins/el-form';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 const { formRef, formModel, formRules, resetForm, submitForm } = useElForm<ILoginParams>(
   {
     account: 'admin',

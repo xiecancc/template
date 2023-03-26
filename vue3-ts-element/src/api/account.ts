@@ -1,5 +1,5 @@
 import http from '@/utils/http';
-import { ILoginParams } from '@/types/IAccount';
+import { ILoginParams } from '@/types/account';
 
 /**
  * 登录API

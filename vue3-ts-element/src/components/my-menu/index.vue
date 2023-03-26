@@ -1,6 +1,6 @@
 <template>
   <!-- 没有子菜单 -->
-  <el-menu-item v-if="!item.children" :index="item.path">
+  <el-menu-item v-if="!item.children || item.children.length == 0" :index="item.path">
     <el-icon><Menu /></el-icon>
     <span>{{ item.meta?.title }} </span>
   </el-menu-item>
@@ -17,6 +17,7 @@
 </template>
 
 <script lang="ts" setup>
+import myMenu from './index.vue';
 import { RouteRecordRaw } from 'vue-router';
 
 defineProps<{
