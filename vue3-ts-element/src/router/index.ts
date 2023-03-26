@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
-// 使用函数懒加载，能够进行有效的分包处理
 const routes = [
   {
     path: '/',
@@ -16,6 +15,7 @@ const routes = [
         name: 'dashboard',
         meta: {
           title: '数据预览',
+          token: true,
         },
         component: () => import('@/views/admin/dashboard/index.vue'),
       },
@@ -32,6 +32,7 @@ const routes = [
             name: 'userlist',
             meta: {
               title: '用户列表',
+              token: true,
             },
             component: () => import('@/views/admin/user/list.vue'),
           },
@@ -56,9 +57,20 @@ export const router = createRouter({
   routes,
 });
 
+/**
+ * 路由守卫
+ * @param to 跳转的路由
+ * @param from 来源路由
+ * @param next 跳转到下一个路由
+ */
 router.beforeEach((to, from, next) => {
-  if (to.name == 'login') return next();
+  // 判断目标路由是否需要 token，如果不需要，则直接跳转到目标路由
+  if (!to.meta.token) return next();
+
+  // 获取本地存储的 token，如果存在，则表示用户已经登录，直接跳转到目标路由
   const token = localStorage.getItem('token');
   if (token) return next();
+
+  // 如果没有 token，则表示用户未登录，跳转到登录页面
   return next('/login');
 });

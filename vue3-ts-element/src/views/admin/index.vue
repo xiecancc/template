@@ -41,7 +41,7 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
-import myMenu from '@/components/my-menu.vue';
+import myMenu from '@/components/my-menu/index.vue';
 import { useRouter } from 'vue-router';
 
 const isCollapse = ref(false);
