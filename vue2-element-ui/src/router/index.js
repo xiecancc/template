@@ -6,31 +6,27 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/',
-    redirect: '/admin',
-  },
-  {
     path: '/login',
     component: LoginView,
   },
   {
-    path: '/admin',
-    redirect: '/admin/dashboard',
+    path: '/',
+    redirect: '/dashboard',
     component: () => import('../views/admin/index.vue'),
     meta: {
       title: '首页',
     },
     children: [
       {
-        path: '/admin/dashboard',
+        path: '/dashboard',
         component: () => import('../views/admin/dashboard/index.vue'),
-        redirect: '/admin/dashboard/index',
+        redirect: '/dashboard/list',
         meta: {
           title: '数据概述',
         },
         children: [
           {
-            path: '/admin/dashboard/index',
+            path: '/dashboard/list',
             component: () => import('../views/admin/dashboard/list.vue'),
             meta: {
               title: '数据列表',

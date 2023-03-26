@@ -32,7 +32,7 @@ export default {
   },
   computed: {
     menus() {
-      return this.$router.options.routes.find((item) => item.path == '/admin').children;
+      return this.$router.options.routes.find((item) => item.path == '/').children;
     },
     active() {
       return this.$route.fullPath;
